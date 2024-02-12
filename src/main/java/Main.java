@@ -29,24 +29,27 @@ class Calculator {
     Double sum = 0.00;
 
     public void start(Scanner scanner, int clientCount) {
-        System.out.println("Введите названия товаров и их стоимость в формате '[Товар] [Стоимость]'\n" +
+        System.out.println("\nВведите названия товаров и их стоимость в формате '[Товар] [Стоимость]'\n" +
                 "Стоимость товара необходимо ввести в формате [рубли,копейки]\n\n" +
-                "После добавление всех товаров введите команду 'Завершить'");
+                "После добавление всех товаров введите команду 'Завершить'\n");
         while (true) {
-            if (scanner.hasNextLine()) {
-                String inputString = scanner.next();
-                if (inputString.equalsIgnoreCase("завершить")) {
-                    System.out.println("\nДобавление товаров завершено\n");
-                    break;
-                } else if (scanner.hasNextDouble()) {
-                    double inputDouble = scanner.nextDouble();
+            String inputString = scanner.next();
+            if (inputString.equalsIgnoreCase("завершить")) {
+                System.out.println("\nДобавление товаров завершено\n");
+                break;
+            } else if (scanner.hasNextDouble()) {
+                double inputDouble = scanner.nextDouble();
+                if (inputDouble > 0.0) {
                     productList.add(new Product(inputString, inputDouble));
-                    System.out.println("Товар успешно добавлен, при необходимости введите следующий товар или завершите работу калькулятора\n");
+                    System.out.println("\nТовар успешно добавлен, при необходимости введите следующий товар или завершите работу калькулятора\n");
                     sum += inputDouble;
                 } else {
-                    System.out.println("Некорректный ввод, повторите еще раз");
-                    scanner.next();
+                    System.out.println("\nНекорректный ввод, повторите еще раз\n");
+                    scanner.nextLine();
                 }
+            } else {
+                System.out.println("\nНекорректный ввод, повторите еще раз\n");
+                scanner.nextLine();
             }
         }
         System.out.println("Добавленные товары:");
