@@ -21,7 +21,6 @@ public class Main {
                 scanner.next();
             }
         }
-
     }
 }
 
@@ -54,12 +53,17 @@ class Calculator {
         for (Product product : productList) {
             System.out.println(product.name);
         }
+
         String rublesType;
-        if (Math.floor(sum / clientCount) == 1.0) {
-            rublesType = "рубль";
-        } else if (Math.floor(sum / clientCount) >= 5.0) {
+
+        if (((Math.floor(sum / clientCount) % 100) >= 10.0 && (Math.floor(sum / clientCount) % 100) <= 20.0)
+                || (Math.floor(sum / clientCount) % 10) == 0.0
+                || ((Math.floor(sum / clientCount) % 10) >= 5.0 && (Math.floor(sum / clientCount) % 10) <= 9.0)) {
             rublesType = "рублей";
+        } else if ((Math.floor(sum / clientCount) % 10) == 1.0) {
+            rublesType = "рубль";
         } else rublesType = "рубля";
+
         System.out.println("\nКаждый должен заплатить: " + String.format("%.2f", sum / clientCount) + " " + rublesType);
     }
 }
